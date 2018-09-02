@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CV.MW.DTOs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -27,7 +28,8 @@ namespace CV.MW.WebService
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("CV.MW.WebService::Running");
+                TestDataObject test = new TestDataObject();
+                await context.Response.WriteAsync("CV.MW.WebService::Running " + test.TestString);
             });
         }
     }

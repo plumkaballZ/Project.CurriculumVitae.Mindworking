@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV.MW.WebService", "CV.MW.WebService\CV.MW.WebService\CV.MW.WebService.csproj", "{D7D1D72B-62A3-4430-9D39-A3C9B8FB8808}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV.MW.DTOs", "CV.MW.DTOs\CV.MW.DTOs.csproj", "{6E230938-B18E-4842-896C-C3143D5DD65E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV.MW.GraphQLService", "CV.MW.GraphQLService\CV.MW.GraphQLService.csproj", "{5A14B4B8-1F5B-4D9E-9188-F03448ADB091}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{D7D1D72B-62A3-4430-9D39-A3C9B8FB8808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7D1D72B-62A3-4430-9D39-A3C9B8FB8808}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7D1D72B-62A3-4430-9D39-A3C9B8FB8808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E230938-B18E-4842-896C-C3143D5DD65E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E230938-B18E-4842-896C-C3143D5DD65E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E230938-B18E-4842-896C-C3143D5DD65E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E230938-B18E-4842-896C-C3143D5DD65E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A14B4B8-1F5B-4D9E-9188-F03448ADB091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A14B4B8-1F5B-4D9E-9188-F03448ADB091}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A14B4B8-1F5B-4D9E-9188-F03448ADB091}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A14B4B8-1F5B-4D9E-9188-F03448ADB091}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
