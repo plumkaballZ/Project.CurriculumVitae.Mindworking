@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using CV.MW.DataProvider;
 using CV.MW.DTOs;
 using CV.MW.GraphQLService;
+using CV.MW.GraphQLService.Helpers;
+using CV.MW.GraphQLService.Types;
+using CV.MW.Repository;
 using GraphQL;
 using GraphQL.Server;
+using GraphQL.Server.Ui.Playground;
 using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,8 +28,15 @@ namespace CV.MW.WebService
         {
             services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
 
-            services.AddSingleton<TestQuery>();
-            services.AddSingleton<ISchema, TestSchema>();
+            services.AddSingleton<DeveloperRepo>();
+            services.AddSingleton<SkillRepo>();
+
+            services.AddSingleton<CodeNinjaQueries>();
+            services.AddSingleton<CodeNinjaType>();
+            services.AddSingleton<SkillType>();
+
+            services.AddSingleton<GraphEntityInterface>();
+            services.AddSingleton<ISchema, CodeNinjaSchema>();
 
             services.AddGraphQL(_ =>
             {
@@ -41,16 +53,12 @@ namespace CV.MW.WebService
                 app.UseDeveloperExceptionPage();
             }
 
-            // add http for Schema at default url /graphql
             app.UseGraphQL<ISchema>("/graphql");
 
-            //// use graphql-playground at default url /ui/playground
-            //app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
-            //{
-            //    Path = "/ui/playground"
-            //});
-
-            //app.UseGraphQL<ISchema>("/graphql");
+            app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
+            {
+                Path = "/play"
+            });
 
             //app.Run(async (context) =>
             //{

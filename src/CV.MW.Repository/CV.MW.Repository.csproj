@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DBEntities\" />
+    <ProjectReference Include="..\CV.MW.DTOs\CV.MW.DTOs.csproj" />
   </ItemGroup>
 
 </Project>

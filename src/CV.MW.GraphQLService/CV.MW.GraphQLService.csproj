@@ -8,4 +8,9 @@
     <PackageReference Include="GraphQL" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CV.MW.DataProvider\CV.MW.DataProvider.csproj" />
+    <ProjectReference Include="..\CV.MW.Repository\CV.MW.Repository.csproj" />
+  </ItemGroup>
+
 </Project>
