@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CV.MW.DTOs\CV.MW.DTOs.csproj" />
     <ProjectReference Include="..\..\CV.MW.GraphQLService\CV.MW.GraphQLService.csproj" />
   </ItemGroup>
 

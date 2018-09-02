@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CV.MW.GraphQLService.Helpers
+namespace CV.MW.GraphQLService
 {
     public class CodeNinjaSchema : Schema
     {

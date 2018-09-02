@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CV.MW.GraphQLService.Helpers
+namespace CV.MW.GraphQLService
 {
     public class CodeNinjaQueries : ObjectGraphType<object>
     {
