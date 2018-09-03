@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV.MW.DTOs", "CV.MW.DTOs\CV
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV.MW.GraphQLService", "CV.MW.GraphQLService\CV.MW.GraphQLService.csproj", "{5A14B4B8-1F5B-4D9E-9188-F03448ADB091}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CV.MW.Repository", "CV.MW.Repository\CV.MW.Repository.csproj", "{C34ACF55-1D7C-4129-BDD9-9B38EFEB07CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CV.MW.Repository", "CV.MW.Repository\CV.MW.Repository.csproj", "{C34ACF55-1D7C-4129-BDD9-9B38EFEB07CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
