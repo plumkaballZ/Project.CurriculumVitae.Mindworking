@@ -3,18 +3,36 @@
 
 <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+
     <script src="~/Scripts/app.js" asp-append-version="true"></script>
     <title>Dont execpt much CSS from a backend developer :P</title>
 </head>
 
 <body>
-    <h3 id="message">
-        :D
-    </h3>
+    <div class="container">
 
+        <h3>This project runs with GraphQLPlayground, try it <a href="/playground">her</a></h3>
+
+        @{
+            Html.RenderPartial("~/Views/_tables.html");
+        }
+    </div>
+   
     <script>
         InitApp();
     </script>
+
+    <style>
+        .table {
+            font-size: 14px;
+            padding : 0px;
+        }
+    </style>
 </body>
 
 </html>

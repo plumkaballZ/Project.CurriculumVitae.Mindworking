@@ -8,6 +8,7 @@ namespace CV.MW.DTOs
     {
         public string LastName { get; set; }
         public int Age { get; set; }
+        public string Role { get; set; }
 
         public Skill[] Skills { get; set; }
 

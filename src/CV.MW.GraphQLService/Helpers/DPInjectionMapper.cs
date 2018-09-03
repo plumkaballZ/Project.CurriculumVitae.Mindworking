@@ -1,4 +1,4 @@
-﻿using CV.MW.GraphQLService.Types;
+﻿using CV.MW.GraphQLService.GraphTypes;
 using CV.MW.Repository;
 using GraphQL;
 using GraphQL.Types;
@@ -24,7 +24,9 @@ namespace CV.MW.GraphQLService.Helpers
             //graphql stuff
             srv.AddSingleton<CodeNinjaQueries>();
             srv.AddSingleton<CodeNinjaType>();
+
             srv.AddSingleton<SkillType>();
+            srv.AddSingleton<SkillTypeEnum>();
 
             srv.AddSingleton<GraphEntityInterface>();
             srv.AddSingleton<ISchema, CodeNinjaSchema>();

@@ -65,7 +65,7 @@ namespace CV.MW.WebService
 
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
-                Path = "/play"
+                Path = "/playground"
             });
 
             //mvc configs
@@ -75,10 +75,10 @@ namespace CV.MW.WebService
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=CustomGraphQL}/{action=Index}");
+                    template: "{controller=App}/{action=Index}");
             });
 
-            //fil håndterings
+            //file handling hack :P
             app.UseDefaultFiles();
             app.UseStaticFiles(new StaticFileOptions
             {

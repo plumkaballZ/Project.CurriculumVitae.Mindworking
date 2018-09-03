@@ -1,5 +1,4 @@
-﻿using CV.MW.GraphQLService.Types;
-using CV.MW.Repository;
+﻿using CV.MW.Repository;
 using GraphQL;
 using GraphQL.Types;
 using Microsoft.Extensions.DependencyInjection;
