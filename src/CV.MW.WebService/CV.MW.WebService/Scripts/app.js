@@ -3,10 +3,10 @@ function InitApp() {
 }
 var App = /** @class */ (function () {
     function App() {
-        console.log('app Ctor');
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "");
-        xhr.setRequestHeader("Content-Type", "application/json");
+        console.log('app.ctor()');
+        //let xhr = new XMLHttpRequest();
+        //xhr.open("GET", "");
+        //xhr.setRequestHeader("Content-Type", "application/json");
     }
     return App;
 }());
