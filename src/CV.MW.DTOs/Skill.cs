@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CV.MW.DTOs
 {
-    public class Skill : Entity
+    public class Skill : dbEntity
     {
         public int Lvl { get; set; }
     }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CV.MW.DTOs
 {
-    public class Entity
+    public abstract class dbEntity
     {
         public Guid Uid { get; set; }
         public string Id { get; set; }

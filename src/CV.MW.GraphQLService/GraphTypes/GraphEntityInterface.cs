@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CV.MW.GraphQLService.Types
 {
-    public class GraphEntityInterface : InterfaceGraphType<Entity>
+    public class GraphEntityInterface : InterfaceGraphType<dbEntity>
     {
         public GraphEntityInterface()
         {

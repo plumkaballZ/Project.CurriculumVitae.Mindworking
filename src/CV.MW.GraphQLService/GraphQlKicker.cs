@@ -15,19 +15,22 @@ namespace CV.MW.GraphQLService
         {
 
         }
+
+
         public void Kick(IServiceCollection srv)
         {
             srv.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
 
-            srv.AddSingleton<DeveloperRepo>();
-            srv.AddSingleton<SkillRepo>();
+            //srv.AddSingleton<DeveloperRepo>();
+            //srv.AddSingleton<SkillRepo>();
 
-            srv.AddSingleton<CodeNinjaQueries>();
-            srv.AddSingleton<CodeNinjaType>();
-            srv.AddSingleton<SkillType>();
+            //srv.AddSingleton<CodeNinjaQueries>();
+            //srv.AddSingleton<CodeNinjaType>();
+            //srv.AddSingleton<SkillType>();
 
-            srv.AddSingleton<GraphEntityInterface>();
-            srv.AddSingleton<ISchema, CodeNinjaSchema>();
+            //srv.AddSingleton<GraphEntityInterface>();
+            //srv.AddSingleton<ISchema, CodeNinjaSchema>();
         }
+
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using CV.MW.GraphQLService;
+using CV.MW.GraphQLService.Helpers;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
@@ -11,6 +12,7 @@ using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CV.MW.WebService
@@ -21,8 +23,7 @@ namespace CV.MW.WebService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            GraphQLKicker qlSetup = new GraphQLKicker();
-            qlSetup.Kick(services);
+            services.AddSingleton<IServiceCollection>(new DPInjectionMapper(services).GetServiceCollection());
 
             services.AddGraphQL(_ =>
             {

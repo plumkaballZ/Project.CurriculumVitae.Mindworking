@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CV.MW.DTOs
 {
-    public class Education : Entity
+    public class Education : dbEntity
     {
     }
 }
