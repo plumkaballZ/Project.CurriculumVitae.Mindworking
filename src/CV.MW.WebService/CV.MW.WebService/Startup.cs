@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using CV.MW.DataProvider;
-using CV.MW.DTOs;
 using CV.MW.GraphQLService;
 using CV.MW.GraphQLService.Helpers;
-using CV.MW.GraphQLService.Types;
-using CV.MW.Repository;
 using GraphQL;
 using GraphQL.Server;
 using GraphQL.Server.Ui.Playground;
@@ -16,7 +13,9 @@ using GraphQL.Types;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace CV.MW.WebService
 {
@@ -26,26 +25,35 @@ namespace CV.MW.WebService
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
-
-            services.AddSingleton<DeveloperRepo>();
-            services.AddSingleton<SkillRepo>();
-
-            services.AddSingleton<CodeNinjaQueries>();
-            services.AddSingleton<CodeNinjaType>();
-            services.AddSingleton<SkillType>();
-
-            services.AddSingleton<GraphEntityInterface>();
-            services.AddSingleton<ISchema, CodeNinjaSchema>();
+            services.AddSingleton<IServiceCollection>(new DPInjectionMapper(services).GetServiceCollection());
 
             services.AddGraphQL(_ =>
             {
                 _.EnableMetrics = true;
                 _.ExposeExceptions = true;
-            }).AddUserContextBuilder(httpContext => httpContext.User); ;
+            }).AddUserContextBuilder(httpContext => httpContext.User);
+
+            //mvc stuff inc 
+            services.AddMvc();
+
+            services.AddMvcCore(options =>
+            {
+                options.RequireHttpsPermanent = true;
+                options.RespectBrowserAcceptHeader = true;
+            })
+            .AddFormatterMappings()
+            .AddJsonFormatters();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                builder =>
+                {
+                    builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+                });
+            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -57,14 +65,27 @@ namespace CV.MW.WebService
 
             app.UseGraphQLPlayground(new GraphQLPlaygroundOptions
             {
-                Path = "/play"
+                Path = "/playground"
             });
 
-            //app.Run(async (context) =>
-            //{
-            //    TestDataObject test = new TestDataObject();
-            //    await context.Response.WriteAsync("CV.MW.WebService::Running " + test.TestString);
-            //});
+            //mvc configs
+            app.UseMvc();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=App}/{action=Index}");
+            });
+
+            //file handling hack :P
+            app.UseDefaultFiles();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Scripts")),
+                RequestPath = "/Scripts"
+            }
+);
         }
     }
 }

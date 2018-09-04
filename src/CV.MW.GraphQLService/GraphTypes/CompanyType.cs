@@ -4,18 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CV.MW.GraphQLService.Types
+namespace CV.MW.GraphQLService.GraphTypes
 {
-    public class SkillType: ObjectGraphType<Skill>
+    public class CompanyType : ObjectGraphType<Company>
     {
-        public SkillType()
+        public CompanyType()
         {
-            Name = "Skill";
+            Name = "Company";
             Field(n => n.Id).Description("id");
             Field(n => n.Name, nullable: false).Description("name");
-            Field(n => n.Lvl, nullable: false).Description("lvl");
-
-            Interface<GraphEntityInterface>();
+            Field(n => n.Description, nullable: false).Description("description");
         }
     }
 }

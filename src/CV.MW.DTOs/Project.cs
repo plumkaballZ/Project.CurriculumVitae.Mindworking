@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CV.MW.DTOs
 {
-    public class Project : Entity
+    public class Project : dbEntity
     {
         public string Description { get; set; }
     }

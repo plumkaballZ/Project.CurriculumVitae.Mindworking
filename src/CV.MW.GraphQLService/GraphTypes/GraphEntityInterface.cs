@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CV.MW.GraphQLService.Types
+namespace CV.MW.GraphQLService.GraphTypes
 {
-    public class GraphEntityInterface : InterfaceGraphType<Entity>
+    public class GraphEntityInterface : InterfaceGraphType<dbEntity>
     {
         public GraphEntityInterface()
         {

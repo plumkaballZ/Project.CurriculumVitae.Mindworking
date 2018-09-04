@@ -1,28 +1,41 @@
 ﻿using CV.MW.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace CV.MW.Repository
 {
-    public class SkillRepo
+    public class SkillRepo : _IBaseRepo<Skill>
     {
-        public IEnumerable<Skill> GetByDeveloperUid(Guid uid)
+        private List<Skill> _skillTable = new List<Skill>()
         {
-            return new List<Skill>() {
-                new Skill() { Name = "C#", Lvl = 7 },
-                new Skill() { Name = "VB", Lvl = 5 },
-                new Skill() { Name = "C++", Lvl = 4 },
-                new Skill() { Name = "Java", Lvl = 3 },
-                new Skill() { Name = ".NET Core", Lvl = 7 },
-                new Skill() { Name = "SQL", Lvl = 7 },
-                new Skill() { Name = "Git", Lvl = 7 },
-                new Skill() { Name = "SCRUM", Lvl = 6 }
+            new Skill() { Id = "1", Name = "C#", Lvl = 7, Type = 1 },
+            new Skill() { Id = "2", Name = "VB", Lvl = 5, Type = 1 },
+            new Skill() { Id = "3", Name = "C++", Lvl = 4, Type = 1 },
+            new Skill() { Id = "4", Name = "Java", Lvl = 3, Type = 1 },
+            new Skill() { Id = "5", Name = ".NET Core", Lvl = 7, Type = 4 },
+            new Skill() { Id = "6", Name = "SQL", Lvl = 7, Type = 2 },
+            new Skill() { Id = "7", Name = "Git", Lvl = 7, Type = 5},
+            new Skill() { Id = "8", Name = "SCRUM", Lvl = 8, Type = 3 },
+            new Skill() { Id = "9", Name = "Elasticsearch", Lvl = 4, Type = 2 },
+            new Skill() { Id = "8", Name = "HAproxy", Lvl = 4, Type = 99 }
             };
+
+        public bool Create(Skill entity)
+        {
+            _skillTable.Add(entity);
+            throw new NotImplementedException();
         }
+
+        public IEnumerable<Skill> GetAll()
+        {
+            return _skillTable;
+        }
+
         public Skill GetById(string id)
         {
-            return new Skill() { Id = "1", Name = "C#", Lvl = 10 };
+            return _skillTable.FirstOrDefault(s => s.Id == id);
         }
     }
 }

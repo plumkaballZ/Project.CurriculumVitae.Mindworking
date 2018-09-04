@@ -1,0 +1,81 @@
+﻿@using CV.MW.WebService.helpers
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+
+    <script src="~/Scripts/app.js" asp-append-version="true"></script>
+
+    <title>Dont execpt much CSS from a backend developer :P</title>
+</head>
+
+<body>
+    <div class="container">
+
+        <h3>This project runs with GraphQLPlayground, try it <a href="/playground">her</a></h3>
+        <br />
+
+        <h4>This data is being pulled from graphQL with a custom made GraphQLApiClient, you can find it in Scripts/app.ts</h4>
+        <h4>Hello, I am:</h4>
+
+        @{
+            List<string> rows_dev = new List<string> { { "id" }, { "name" }, { "lastName" }, { "age" }, { "role" }, { "query" } };
+            DataTableViewModel dataTable_dev = new DataTableViewModel("devTable", rows_dev);
+            Html.RenderPartial("~/Views/DataTableTemplate.cshtml", dataTable_dev);
+        }
+
+        <h4>I have skills in:</h4>
+
+        @{
+            List<string> rows_skills = new List<string> { { "name" }, { "lvl" }, { "type" }, { "query" } };
+            DataTableViewModel dataTable_skills = new DataTableViewModel("skillsTable", rows_skills);
+            Html.RenderPartial("~/Views/DataTableTemplate.cshtml", dataTable_skills);
+        }
+
+        <h4>But my favorite skill is:</h4>
+
+        @{
+            List<string> rows_skill = new List<string> { { "name" }, { "type" }, { "query" } };
+            DataTableViewModel dataTable_skill = new DataTableViewModel("singleSkillTable", rows_skill);
+            Html.RenderPartial("~/Views/DataTableTemplate.cshtml", dataTable_skill);
+        }
+
+        <h4>My education looks like this:</h4>
+
+        @{
+            List<string> rows_education = new List<string> { { "name" }, { "startDate" }, { "endDate" }, { "query" } };
+            DataTableViewModel dataTable_education = new DataTableViewModel("educationTable", rows_education);
+            Html.RenderPartial("~/Views/DataTableTemplate.cshtml", dataTable_education);
+        }
+
+        <h4>I have worked at:</h4>
+
+        @{
+            List<string> rows_company = new List<string> { { "name" }, { "description" }, { "query" } };
+            DataTableViewModel dataTable_company = new DataTableViewModel("companyTable", rows_company);
+            Html.RenderPartial("~/Views/DataTableTemplate.cshtml", dataTable_company);
+            }
+
+    </div>
+
+    <script>
+        InitApp();
+    </script>
+
+    <style>
+        .table {
+            font-size: 14px;
+            padding: 0px;
+        }
+    </style>
+</body>
+
+</html>
+
