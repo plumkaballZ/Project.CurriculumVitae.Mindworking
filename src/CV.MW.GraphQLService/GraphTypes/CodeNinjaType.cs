@@ -9,7 +9,7 @@ namespace CV.MW.GraphQLService.GraphTypes
 {
     public class CodeNinjaType : ObjectGraphType<Developer>
     {
-        public CodeNinjaType(SkillRepo skillRepo, EducationRepo educationRepo)
+        public CodeNinjaType(SkillRepo skillRepo, EducationRepo educationRepo, CompanyRepo companyRepo)
         {
             Name = "CodeNinja";
 
@@ -19,14 +19,9 @@ namespace CV.MW.GraphQLService.GraphTypes
             Field(n => n.Age, nullable: false).Description("age");
             Field(n => n.Role, nullable: false).Description("Role");
 
-            Field<ListGraphType<SkillType>>(
-               "skills",
-               resolve: context => skillRepo.GetAll()
-           );
-            Field<ListGraphType<EducationType>>(
-              "educations",
-              resolve: context => educationRepo.GetAll()
-          );
+            Field<ListGraphType<SkillType>>("skills", resolve: context => skillRepo.GetAll());
+            Field<ListGraphType<EducationType>>("educations", resolve: context => educationRepo.GetAll());
+            Field<ListGraphType<CompanyType>>("companies", resolve: context => companyRepo.GetAll());
 
             Interface<GraphEntityInterface>();
         }

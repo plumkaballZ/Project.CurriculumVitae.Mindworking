@@ -1,39 +1,50 @@
 ﻿declare var _app: App;
 declare var $: any;
 
-var _queryManager: QueryManager;
-var _tablePopulater: TablePopulater;
+declare var localUrl: string;
 
 function InitApp() {
-    _queryManager = new QueryManager();
-    _tablePopulater = new TablePopulater(); 
+    localUrl = window.location.href;
     _app = new App();
-}
-
-function populateTable(tableId: string, data: any) {
-
-    $(tableId).bootstrapTable({
-        data: data
-    });
 }
 
 class App {
     constructor() {
-        var graphQLApiClient = new GraphQLApiClient('https://localhost:44385/graphql?');
+        var queryManager: QueryManager = new QueryManager();
 
-        graphQLApiClient.SendQuery(_queryManager.GetDeveloperInfo(), _tablePopulater.devTable);
 
-        graphQLApiClient.SendQuery(_queryManager.GetSkillsList(), _tablePopulater.skillsTable);
+        var devTable = new GraphQLDataTable('#devTable')
+        devTable.SendQueryWithCallBack(queryManager.GetDeveloperInfo(), devTable_fallBackFunc)
 
-        graphQLApiClient.SendQuery(_queryManager.GetSingleStringById(), _tablePopulater.singleSkillTable);
+        var skillsTable = new GraphQLDataTable('#skillsTable')
+        skillsTable.SendQueryWithCallBack(queryManager.GetSkillsList(), skillsTable_fallBackFunc)
 
-        graphQLApiClient.SendQuery(_queryManager.GetListOfEducations(), _tablePopulater.educationsTable);
+        var singleSkillTable = new GraphQLDataTable('#singleSkillTable')
+        singleSkillTable.SendQueryWithCallBack(queryManager.GetSingleStringById(), singleSkillTable_fallBackFunc)
 
-        graphQLApiClient.SendQuery(_queryManager.GetAllData(), _tablePopulater.finalTable);
+        var educationTable = new GraphQLDataTable('#educationTable')
+        educationTable.SendQueryWithCallBack(queryManager.GetListOfEducations(), educationsTable_fallBackFunc)
+
+        var educationTable = new GraphQLDataTable('#companyTable')
+        educationTable.SendQueryWithCallBack(queryManager.GetAllCompanies(), companyTable_fallBackFunc)
     }
 }
 
+class GraphQLDataTable {
 
+    private _grapQLClient: GraphQLApiClient;
+    private _id: string;
+
+    constructor(id: string) {
+
+        this._grapQLClient = new GraphQLApiClient(localUrl + 'graphql?');
+        this._id = id;
+    }
+
+    public SendQueryWithCallBack(query: string, fallBack: any): void {
+        this._grapQLClient.SendQuery(query, fallBack);
+    }
+}
 
 class GraphQLApiClient {
 
@@ -53,11 +64,17 @@ class GraphQLApiClient {
         xhttp.open(httpMode, this._url + url + query, true);
 
         xhttp.setRequestHeader("Content-Type", "application/json");
+
+
         xhttp.send();
 
         xhttp.onload = function (response: any) {
             let data = response.target.response;
-            callBack(JSON.parse(data));
+
+            var jsonObj = JSON.parse(data)
+            jsonObj.query = query;
+
+            callBack(jsonObj);
         };
     }
 }
@@ -78,45 +95,45 @@ class QueryManager {
     public GetAllData(): string {
         return "{ ervin { id name educations { id name } skills { id name } } }";
     }
+    public GetAllCompanies(): string {
+        return "{ ervin { companies{ name description } } }";
+    }
+}
+
+//callback fucntions :D
+
+function devTable_fallBackFunc(obj: any): void {
+    obj.data.ervin.query = obj.query;
+    popTable('#devTable', [obj.data.ervin]);
+}
+
+function skillsTable_fallBackFunc(obj: any): void {
+    obj.data.ervin.skills[0].query = obj.query;
+    popTable('#skillsTable', obj.data.ervin.skills);
+}
+
+function singleSkillTable_fallBackFunc(obj: any): void {
+    obj.data.skill.query = obj.query;
+    popTable('#singleSkillTable', [obj.data.skill]);
+}
+
+function educationsTable_fallBackFunc(obj: any): void {
+    obj.data.ervin.educations[0].query = obj.query;
+    popTable('#educationTable', obj.data.ervin.educations);
+}
+
+function companyTable_fallBackFunc(obj: any): void {
+    obj.data.ervin.companies[0].query = obj.query;
+    popTable('#companyTable', obj.data.ervin.companies);
+}
+
+function popTable(tableId: string, data: any) {
+    $(tableId).bootstrapTable({
+        data: data
+    });
 }
 
 
 
-class TablePopulater {
 
-    devTable(obj: any): void {
-        obj.data.ervin.query = _queryManager.GetDeveloperInfo();
-        populateTable('#devTable', [obj.data.ervin])
-    }
-
-    skillsTable(obj: any): void {
-        obj.data.ervin.skills[0].query = _queryManager.GetSkillsList();
-        populateTable('#skillsTable', obj.data.ervin.skills)
-    }
-
-    singleSkillTable(obj: any): void {
-        obj.data.skill.query = _queryManager.GetSingleStringById();
-        populateTable('#singleSkillTable', [obj.data.skill])
-    }
-
-    educationsTable(obj: any): void {
-        obj.data.ervin.educations[0].query = _queryManager.GetListOfEducations();
-        populateTable('#educationTable', obj.data.ervin.educations)
-    }
-    finalTable(obj: any): void {
-        //console.log(obj);
-
-        //var finalObj = [
-        //    obj.Ervin,
-        //    obj.educations
-        //]
-
-        //populateTable('#finalTable', finalObj)
-        //populateTable('#finalTable', obj.data.ervin.skills)
-
-        //obj.data.ervin.educations[0].query = _queryManager.GetAllData();
-        //populateTable('#educationTable', obj.data.ervin.educations)
-    }
-
-}
 

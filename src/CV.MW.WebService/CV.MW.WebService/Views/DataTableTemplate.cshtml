@@ -1,0 +1,15 @@
+﻿@using CV.MW.WebService.helpers
+
+@model DataTableViewModel
+
+
+<table id="@Model.Id" class="table table-striped">
+    <thead>
+        <tr>
+            @foreach (var row in Model.Rows)
+            {
+                <th data-field="@row.DataFieldName">@row.DataFieldName</th>
+            }
+        </tr>
+    </thead>
+</table>

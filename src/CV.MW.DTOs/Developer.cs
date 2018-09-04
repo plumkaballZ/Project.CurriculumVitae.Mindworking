@@ -12,6 +12,7 @@ namespace CV.MW.DTOs
 
         public Skill[] Skills { get; set; }
         public Education[] Educations { get; set; }
+        public Company[] Companies { get; set; }
 
     }
 }

@@ -21,6 +21,7 @@ namespace CV.MW.GraphQLService.Helpers
             srv.AddSingleton<DeveloperRepo>();
             srv.AddSingleton<SkillRepo>();
             srv.AddSingleton<EducationRepo>();
+            srv.AddSingleton<CompanyRepo>();
 
             //graphql stuff
             srv.AddSingleton<CodeNinjaQueries>();
@@ -30,6 +31,7 @@ namespace CV.MW.GraphQLService.Helpers
             srv.AddSingleton<CodeNinjaType>();
             srv.AddSingleton<SkillType>();
             srv.AddSingleton<EducationType>();
+            srv.AddSingleton<CompanyType>();
 
             //input type -> for create data
             srv.AddSingleton<SkillInputType>();
