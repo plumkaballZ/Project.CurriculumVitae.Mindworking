@@ -17,6 +17,11 @@ namespace CV.MW.Repository
             Uid = Guid.NewGuid()
         } };
 
+        public bool Create(Developer entity)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Developer> GetAll()
         {
             throw new NotImplementedException();

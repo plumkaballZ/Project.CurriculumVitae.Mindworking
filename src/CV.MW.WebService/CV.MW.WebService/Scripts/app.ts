@@ -2,50 +2,38 @@
 declare var $: any;
 
 var _queryManager: QueryManager;
+var _tablePopulater: TablePopulater;
 
 function InitApp() {
     _queryManager = new QueryManager();
+    _tablePopulater = new TablePopulater(); 
     _app = new App();
-} 
+}
+
+function populateTable(tableId: string, data: any) {
+
+    $(tableId).bootstrapTable({
+        data: data
+    });
+}
 
 class App {
-    private _graphQLApiClient: GraphQLApiClient;
-   
-
     constructor() {
-        this._graphQLApiClient = new GraphQLApiClient('https://localhost:44385/graphql?');
-        this._graphQLApiClient.SendQuery(_queryManager.GetDeveloperInfo(), this.popDevTable);
-        this._graphQLApiClient.SendQuery(_queryManager.GetSkillsList(), this.popSkillsTable);
-        this._graphQLApiClient.SendQuery(_queryManager.GetSingleStringById(), this.popSingleSkill);
-    }
+        var graphQLApiClient = new GraphQLApiClient('https://localhost:44385/graphql?');
 
-    popDevTable(obj: any): void {
+        graphQLApiClient.SendQuery(_queryManager.GetDeveloperInfo(), _tablePopulater.devTable);
 
-        obj.data.ervin.query = _queryManager.GetDeveloperInfo();
+        graphQLApiClient.SendQuery(_queryManager.GetSkillsList(), _tablePopulater.skillsTable);
 
-        $('#devTable').bootstrapTable({
-            data: [
-                obj.data.ervin
-            ]
-        });
-    }
+        graphQLApiClient.SendQuery(_queryManager.GetSingleStringById(), _tablePopulater.singleSkillTable);
 
-    popSkillsTable(obj: any) {
-        obj.data.ervin.skills[0].query = _queryManager.GetSkillsList();
-        $('#skillsTable').bootstrapTable({
-            data: obj.data.ervin.skills
-        });
-    }
-    popSingleSkill(obj: any) {
-        obj.data.skill.query = _queryManager.GetSingleStringById();
-        $('#singleSkillTable').bootstrapTable({
-            data: [
-                obj.data.skill
-            ]
-         
-        });
+        graphQLApiClient.SendQuery(_queryManager.GetListOfEducations(), _tablePopulater.educationsTable);
+
+        graphQLApiClient.SendQuery(_queryManager.GetAllData(), _tablePopulater.finalTable);
     }
 }
+
+
 
 class GraphQLApiClient {
 
@@ -72,7 +60,6 @@ class GraphQLApiClient {
             callBack(JSON.parse(data));
         };
     }
-
 }
 
 class QueryManager {
@@ -80,9 +67,56 @@ class QueryManager {
         return "{ervin{id name lastName age role}}";
     }
     public GetSkillsList(): string {
-        return "{ ervin { skills{ name lvl, type } } }";
+        return "{ ervin { skills{ name lvl type } } }";
     }
     public GetSingleStringById(): string {
-        return `{skill(id:"1"){name, type}}`;
+        return `{skill(id:"1"){name type}}`;
+    }
+    public GetListOfEducations(): string {
+        return "{ ervin { educations { name startDate endDate} } }";
+    }
+    public GetAllData(): string {
+        return "{ ervin { id name educations { id name } skills { id name } } }";
     }
 }
+
+
+
+class TablePopulater {
+
+    devTable(obj: any): void {
+        obj.data.ervin.query = _queryManager.GetDeveloperInfo();
+        populateTable('#devTable', [obj.data.ervin])
+    }
+
+    skillsTable(obj: any): void {
+        obj.data.ervin.skills[0].query = _queryManager.GetSkillsList();
+        populateTable('#skillsTable', obj.data.ervin.skills)
+    }
+
+    singleSkillTable(obj: any): void {
+        obj.data.skill.query = _queryManager.GetSingleStringById();
+        populateTable('#singleSkillTable', [obj.data.skill])
+    }
+
+    educationsTable(obj: any): void {
+        obj.data.ervin.educations[0].query = _queryManager.GetListOfEducations();
+        populateTable('#educationTable', obj.data.ervin.educations)
+    }
+    finalTable(obj: any): void {
+        //console.log(obj);
+
+        //var finalObj = [
+        //    obj.Ervin,
+        //    obj.educations
+        //]
+
+        //populateTable('#finalTable', finalObj)
+        //populateTable('#finalTable', obj.data.ervin.skills)
+
+        //obj.data.ervin.educations[0].query = _queryManager.GetAllData();
+        //populateTable('#educationTable', obj.data.ervin.educations)
+    }
+
+}
+

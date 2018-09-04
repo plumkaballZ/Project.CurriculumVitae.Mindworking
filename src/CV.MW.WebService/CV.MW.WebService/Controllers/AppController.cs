@@ -1,5 +1,4 @@
-﻿using CV.MW.WebService.Helpers;
-using GraphQL.Server.Transports.AspNetCore.Common;
+﻿using GraphQL.Server.Transports.AspNetCore.Common;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System;

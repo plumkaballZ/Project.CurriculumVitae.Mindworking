@@ -20,15 +20,24 @@ namespace CV.MW.GraphQLService.Helpers
             //repos
             srv.AddSingleton<DeveloperRepo>();
             srv.AddSingleton<SkillRepo>();
+            srv.AddSingleton<EducationRepo>();
 
             //graphql stuff
             srv.AddSingleton<CodeNinjaQueries>();
+            srv.AddSingleton<CodeNinjaMutation>();
+
+            //grapgql types
             srv.AddSingleton<CodeNinjaType>();
-
             srv.AddSingleton<SkillType>();
-            srv.AddSingleton<SkillTypeEnum>();
+            srv.AddSingleton<EducationType>();
 
+            //input type -> for create data
+            srv.AddSingleton<SkillInputType>();
+
+            //more grapql stuff
             srv.AddSingleton<GraphEntityInterface>();
+
+            srv.AddSingleton<SkillTypeEnum>();
             srv.AddSingleton<ISchema, CodeNinjaSchema>();
 
             _srvCollection = srv;

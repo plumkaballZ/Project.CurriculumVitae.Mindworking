@@ -11,15 +11,13 @@ namespace CV.MW.GraphQLService.GraphTypes
         {
             Name = "SkillTypeEnum";
             Description = "SkillTypeEnum";
+
             AddValue("Coding", "Coding", 1);
-            AddValue("Database", "Coding", 2);
-            AddValue("ProjectManagement", ".Coding", 3);
+            AddValue("Database", "Database", 2);
+            AddValue("ProjectManagement", ".ProjectManagement", 3);
+            AddValue("Frameworks", ".Frameworks", 4);
+            AddValue("VersionControl", ".VersionControl", 5);
+            AddValue("NotYetDefined", "Unknown", 99);
         }
-    }
-    public enum SkillTypes
-    {
-        Coding = 1,
-        Database = 2,
-        ProjectManagement = 3
     }
 }

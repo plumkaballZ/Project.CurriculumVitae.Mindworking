@@ -16,9 +16,17 @@ namespace CV.MW.Repository
             new Skill() { Id = "4", Name = "Java", Lvl = 3, Type = 1 },
             new Skill() { Id = "5", Name = ".NET Core", Lvl = 7, Type = 4 },
             new Skill() { Id = "6", Name = "SQL", Lvl = 7, Type = 2 },
-            new Skill() { Id = "7", Name = "Git", Lvl = 7, Type = 4},
-            new Skill() { Id = "8", Name = "SCRUM", Lvl = 3, Type = 3 }
+            new Skill() { Id = "7", Name = "Git", Lvl = 7, Type = 5},
+            new Skill() { Id = "8", Name = "SCRUM", Lvl = 8, Type = 3 },
+            new Skill() { Id = "9", Name = "Elasticsearch", Lvl = 4, Type = 2 },
+            new Skill() { Id = "8", Name = "HAproxy", Lvl = 4, Type = 99 }
             };
+
+        public bool Create(Skill entity)
+        {
+            _skillTable.Add(entity);
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<Skill> GetAll()
         {

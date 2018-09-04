@@ -6,19 +6,16 @@ using System.Text;
 
 namespace CV.MW.GraphQLService.GraphTypes
 {
-    public class SkillType: ObjectGraphType<Skill>
+    public class EducationType : ObjectGraphType<Education>
     {
-        public SkillType()
+        public EducationType()
         {
-            Name = "Skill";
-
+            Name = "Education";
             Field(n => n.Id).Description("id");
             Field(n => n.Name, nullable: false).Description("name");
-            Field(n => n.Lvl, nullable: false).Description("lvl");
 
-            Field<SkillTypeEnum>("type", "Type");
-
-            Interface<GraphEntityInterface>();
+            Field(n => n.StartDate, nullable: false).Description("startDate");
+            Field(n => n.EndDate, nullable: false).Description("endDate");
         }
     }
 }

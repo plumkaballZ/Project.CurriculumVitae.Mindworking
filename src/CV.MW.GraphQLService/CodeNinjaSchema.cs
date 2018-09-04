@@ -12,6 +12,7 @@ namespace CV.MW.GraphQLService
             :base(resolver)
         {
             Query = resolver.Resolve<CodeNinjaQueries>();
+            Mutation = resolver.Resolve<CodeNinjaMutation>();
         }
     }
 }

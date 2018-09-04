@@ -11,6 +11,7 @@ namespace CV.MW.DTOs
         public string Role { get; set; }
 
         public Skill[] Skills { get; set; }
+        public Education[] Educations { get; set; }
 
     }
 }

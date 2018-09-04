@@ -6,6 +6,7 @@ namespace CV.MW.Repository
 {
     public interface _IBaseRepo<T>
     {
+        bool Create(T entity);
         T GetById(string id);
         IEnumerable<T> GetAll();
     }
